@@ -7,14 +7,10 @@ import cn.edu.hfut.dmic.webcollector.plugin.rocks.BreadthCrawler;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class XiAnPolicyCrawler extends BreadthCrawler {
     /**
      * Crawling news from github news
      * 自动 弹出 URL 地址，继承 BreadthCrawler（广度爬虫）
-     * <p/>
      * cn.edu.hfut.dmic.webcollector.plugin.rocks.BreadthCrawler是基于RocksDB的插件,于2.72版重新设计
      * BreadthCrawler可以设置正则规律，让遍历器自动根据URL的正则遍历网站，可以关闭这个功能，自定义遍历
      * 如果autoParse设置为true，遍历器会自动解析页面中符合正则的链接，加入后续爬取任务，否则不自动解析链接。
@@ -73,7 +69,7 @@ public class XiAnPolicyCrawler extends BreadthCrawler {
         getConf().setTopN(100);
 
         /**
-         * 是否进行断电爬取，默认为 false
+         * 是否进行断点爬取，默认为 false
          * setResumable(true);
          */
     }
@@ -142,7 +138,7 @@ public class XiAnPolicyCrawler extends BreadthCrawler {
         ContentExtractor contentExtractor;
 
         /**
-         * MyAutoNewsCrawler 构造器中会进行 数据初始化，这两个参数接着会传给父类
+         * XiAnPolicyCrawler 构造器中会进行 数据初始化，这两个参数接着会传给父类
          * super(crawlPath, autoParse);
          * crawlPath：表示设置保存爬取记录的文件夹，本例运行之后会在应用根目录下生成一个 "crawl" 目录存放爬取信息
          * autoParse：表示进行 URL自动探测
@@ -154,6 +150,7 @@ public class XiAnPolicyCrawler extends BreadthCrawler {
          * 第一层：爬取的目标网址，即文章列表页
          * 第二层：具体的文章内容页（此时需要获取的图片恰好就在其中）
          * 第三层：就是为了获取第二层中的图片地址
+         * 垃圾网站，我已经在第二层将图片地址解析
          */
         crawler.start(2);
     }
